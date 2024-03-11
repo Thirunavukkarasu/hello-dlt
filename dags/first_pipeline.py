@@ -36,30 +36,31 @@ default_task_args = {
     default_args=default_task_args,
 )
 def load_data():
-    # set `use_data_folder` to True to store temporary data on the `data` bucket. Use only when it does not fit on the local storage
-    tasks = PipelineTasksGroup(
-        "pipeline_decomposed", use_data_folder=False, wipe_local_data=True
-    )
+    # # set `use_data_folder` to True to store temporary data on the `data` bucket. Use only when it does not fit on the local storage
+    # tasks = PipelineTasksGroup(
+    #     "pipeline_decomposed", use_data_folder=False, wipe_local_data=True
+    # )
 
-    # import your source from pipeline script
-    from pipeline_or_source_script import source
+    # # import your source from pipeline script
+    # from pipeline_or_source_script import source
 
-    # modify the pipeline parameters
-    pipeline = dlt.pipeline(
-        pipeline_name="pipeline_name",
-        dataset_name="dataset_name",
-        destination="duckdb",
-        full_refresh=False,  # must be false if we decompose
-    )
-    # create the source, the "serialize" decompose option will converts dlt resources into Airflow tasks. use "none" to disable it
-    tasks.add_run(
-        pipeline,
-        source(),
-        decompose="serialize",
-        trigger_rule="all_done",
-        retries=0,
-        provide_context=True,
-    )
+    # # modify the pipeline parameters
+    # pipeline = dlt.pipeline(
+    #     pipeline_name="pipeline_name",
+    #     dataset_name="dataset_name",
+    #     destination="duckdb",
+    #     full_refresh=False,  # must be false if we decompose
+    # )
+    # # create the source, the "serialize" decompose option will converts dlt resources into Airflow tasks. use "none" to disable it
+    # tasks.add_run(
+    #     pipeline,
+    #     source(),
+    #     decompose="serialize",
+    #     trigger_rule="all_done",
+    #     retries=0,
+    #     provide_context=True,
+    # )
+    print("invoked")
 
 
 load_data()
